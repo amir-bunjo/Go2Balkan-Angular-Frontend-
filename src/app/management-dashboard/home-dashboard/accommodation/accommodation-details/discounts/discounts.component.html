@@ -1,0 +1,144 @@
+<app-header [idAccommodation]="id"></app-header>
+
+
+
+<div class="container-fluid" >
+  <div class="row">
+
+
+    <div >
+
+      <div class="panel panel-default panel-table" >
+        <div class="panel-heading" style="padding: 0px 15px;">
+          <div class="row">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary active" (click)="pressAge()">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked> Age discount
+              </label>
+              <label class="btn btn-secondary"  (click)="pressQuan()">
+                <input type="radio" name="options" id="option2" autocomplete="off" > Quantity discount
+              </label>
+              <label class="btn btn-secondary" (click)="pressMisc()" >
+                <input type="radio" name="options" id="option3" autocomplete="off" > Miscellaneous discount
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-heading" style="padding: 0px 15px;">
+          <div class="row" >
+            <div class="col col-xs-10">
+              <div class="btn-group btn-group-toggle" data-toggle="buttons" >
+                <label class="btn btn-secondary active" (click)="pressedActiveDiscount()" >
+                  <input type="radio" name="options" id="option4" autocomplete="off" checked > Active<span style="text-transform: lowercase;"> {{pressedDiscountType}} </span> discount
+                </label>
+                <label class="btn btn-secondary" (click)="pressedExpiredDiscount()"  >
+                  <input type="radio" name="options" id="option5" autocomplete="off"> Expired <span style="text-transform: lowercase;"> {{pressedDiscountType}} </span> discount
+                </label>
+              </div>
+            </div>
+            <div class="col col-xs-2 text-right">
+              <button type="button" (click)="addNewDiscount(pressed,id)" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#addDiscountType" >Add Discount Type</button>
+            </div>
+            <!--
+            <span  *ngIf="disDialogStatus" > <app-discount-type-modal [id]="id" [editStatus]="editStatus" [pressedDiscountType]="pressed" (addButtonClicked)="loadDiscounts()" (editButtonClicked)="select()"></app-discount-type-modal></span>
+          -->
+          </div>
+
+
+
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped table-bordered table-list" id="table" >
+            <thead class="thead-light">
+            <tr>
+              <th colspan="7ng" >
+                %|{{pressedDiscountType}} Discount
+              </th>
+            </tr>
+            </thead>
+            <thead>
+            <tr>
+              <th>Option</th>
+              <th>Discount name</th>
+              <th>Start Date</th>
+              <th >End Date</th>
+              <th *ngIf="pressedDiscountType=='Age'">Min age</th>
+              <th *ngIf="pressedDiscountType=='Age'">Max age</th>
+              <th *ngIf="pressedDiscountType=='Quantity'">Min num</th>
+              <th *ngIf="pressedDiscountType=='Quantity'">Max num</th>
+              <th>Amount </th>
+            </tr>
+            </thead>
+            <tbody *ngIf="pressedActive">
+
+
+            <tr *ngFor="let  discount of discountType"  [hidden]="isActive(discount.priceEndDate) || id!=discount.accommodation" >
+              <td  class="d-flex justify-content-center">
+                <a class="btn btn-default" data-toggle="modal"   (click)="updateDiscount(discount,pressed,id)"><em class="fa fa-pencil"></em></a>
+                <a class="btn btn-danger"  data-toggle="modal"  (click)="deleteDiscount(discount.id)"><em class="fa fa-trash"></em></a>
+              </td>
+              <td class="hidden-xs">{{discount.discountName}}</td>
+              <td  >{{discount.priceStartDate}}</td>
+              <td  >{{discount.priceEndDate}}</td>
+              <td [hidden]="pressedDiscountType!='Age'">{{discount.minAge}}</td>
+              <td [hidden]="pressedDiscountType!='Age'" >{{discount.maxAge}}</td>
+              <td [hidden]="pressedDiscountType!='Quantity'">{{discount.minNum}}</td>
+              <td [hidden]="pressedDiscountType!='Quantity'">{{discount.maxNum}}</td>
+              <td [hidden]="discount.discountPercentageAmount==0" > {{discount.discountPercentageAmount}} % </td>
+
+              <td [hidden]="discount.discountFixedAmount==0 ">{{discount.discountFixedAmount}} USD</td>
+
+            </tr>
+<!--
+            <span *ngIf="editStatus" > <app-discount-type-modal [id]="id" [editStatus]="editStatus" [pressedDiscountType]="pressed" (addButtonClicked)="loadDiscounts()" (editButtonClicked)="select()"></app-discount-type-modal></span>
+-->
+            </tbody>
+
+
+
+            <tbody *ngIf="!pressedActive">
+            <tr  *ngFor="let discount of discountType"  [hidden]="!isActive(discount.priceEndDate) || id!=discount.accommodation" >
+              <td class="d-flex justify-content-center">
+                <a class="btn btn-default" data-toggle="modal" data-target="#addDiscountType"  (click)="updateDiscount(discount,pressed,id)"><em class="fa fa-pencil"></em></a>
+                <a class="btn btn-danger" data-toggle="modal"   (click)="deleteDiscount(discount.id)" ><em class="fa fa-trash"></em></a>
+              </td>
+              <td class="hidden-xs">{{discount.discountName}}</td>
+              <td  >{{discount.priceStartDate}}</td>
+              <td  >{{discount.priceEndDate}}</td>
+              <td [hidden]="pressedDiscountType!='Age'">{{discount.minAge}}</td>
+              <td [hidden]="pressedDiscountType!='Age'">{{discount.maxAge}}</td>
+              <td [hidden]="pressedDiscountType!='Quantity'">{{discount.minNum}}</td>
+              <td [hidden]="pressedDiscountType!='Quantity'">{{discount.maxNum}}</td>
+              <td [hidden]=" discount.discountPercentageAmount==0" > {{discount.discountPercentageAmount}} % </td>
+              <td [hidden]="discount.discountFixedAmount==0" >{{discount.discountFixedAmount}} USD </td>
+
+            </tr>
+<!--
+            <span *ngIf="editStatus" > <app-discount-type-modal [id]="id" [editStatus]="editStatus"  [pressedDiscountType]="pressed" (addButtonClicked)="loadDiscounts()" (editButtonClicked)="select()" ></app-discount-type-modal></span>
+-->
+            </tbody>
+          </table>
+
+
+        </div>
+        <!--
+        -->
+      </div>
+
+    </div>
+  </div>
+  <hr>
+
+
+  <hr>
+
+
+
+
+
+
+
+
+
+

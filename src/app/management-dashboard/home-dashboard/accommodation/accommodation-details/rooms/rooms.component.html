@@ -1,0 +1,86 @@
+
+<app-header [idAccommodation]="id"></app-header>
+
+<div class="container-fluid">
+    <div class="row">
+
+
+        <div>
+            <div class="panel panel-default panel-table">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col col-xs-6">
+                            <h3 class="panel-title">Rooms Type</h3>
+                        </div>
+                        <div class="col col-xs-6 text-right">
+                            <button type="button" (click)="rootStat()" class="btn btn-sm btn-primary btn-create" data-toggle="modal" data-target="#addRoomType" >Add Room Type</button>
+
+                        </div>
+                        <span *ngIf="rommStatus"> <app-room-type-modal [roomTypes]="roomNames" [id]="id"></app-room-type-modal></span>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-list">
+                        <thead>
+                        <tr>
+                            <th><em class="fa fa-cog"></em></th>
+                            <th class="hidden-xs">ROOM TYPE</th>
+                            <th>ROOMS No</th>
+                            <th>PRICE PERIOD</th>
+                            <th>DETAILS</th>
+                        </tr>
+                        </thead>
+                        <tbody *ngFor="let room of roomType">
+                    
+                        <tr>
+                            <td align="center">
+                                <a class="btn btn-default"><i class="fas fa-pencil-alt"></i></a>
+                                <a class="btn btn-danger"><i class="fas fa-trash-restore-alt"></i></a>
+                            </td>
+                            <td class="hidden-xs">{{room.roomName}} </td>
+                            <td>{{room.numberOfRooms}}</td>
+                            <td><a class="btn btn-primary" (click)="getPricePeriode(room.id)" data-toggle="collapse" data-target=".order1" ><i class="fas fa-chevron-circle-down"></i>Price period</a></td>
+                            <td>
+                                    <a class="btn btn-primary"  data-toggle="collapse" data-target=".order2" (click)="navigateRoomGallery(id,room.id) " ><i class="fas fa-images">Gallery</i></a>
+                                    <a class="btn btn-primary"  data-toggle="collapse" data-target=".order2" ><i class="fas fa-list-alt">Fac</i></a>
+                            </td>
+                        </tr>
+                        <tr *ngIf="includesPricePeriodeId(room.id) " >
+                            <td colspan="5" >
+                                <app-price-periode  [pricePeride]="pricePeriode" [accommodationId]="id" (addPricePeriodeClicked)="reload()"  [roomId]="room.id" (openPricePeriodeDialog)="openDialog(id,roomId)" (deletePricePeriodeEmitter)="deletePricePeriode($event)"></app-price-periode>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+   
+<hr>
+    
+</div>
+
+<!--
+<table  class="table table-striped table-bordered table-list">
+    <thead>
+        <tr>
+            <th>name</th>
+            <th>surname</th>
+            <th>price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>name</td>
+            <td>name</td>
+            <td>name</td>
+        </tr>
+    </tbody>
+</table>
+-->

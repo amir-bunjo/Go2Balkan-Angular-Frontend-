@@ -1,0 +1,93 @@
+<h5 style="font-weight: bold"><span class="glyphicon glyphicon-info-sign"></span> Internet access is important for many travelers. Free Wi-Fi is a huge selling point, too!</h5>
+<span class="help-block" style="color: green;" *ngIf="successSave">Saved (this help-block is under design)</span>
+<br>
+
+<div class="btn-group">
+  Is internet available to guest?
+  <br>
+  <button *ngIf="firstChoice == '' || firstChoice == 'No'" type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    No <span class="caret"></span>
+  </button>
+
+  <button *ngIf="firstChoice != 'No' && firstChoice != ''" type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    {{firstChoice}} <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu" style="cursor: pointer">
+    <li><a (click)="simpleDisplayDropdownFirstChoice('No')">No</a></li>
+    <li><a (click)="simpleDisplayDropdownFirstChoice('Yes, free')">Yes, free</a></li>
+    <li><a (click)="simpleDisplayDropdownFirstChoice('Yes, paid')">Yes, paid</a></li>
+  </ul>
+</div>
+
+<div *ngIf="firstChoice == 'Yes, free'">
+  <br>
+</div>
+
+<div *ngIf="firstChoice == 'Yes, paid'">
+  <br>
+  Internet price
+  <input [(ngModel)]="priceValue" (input)="validatePriceField()" type="number" style="width: 200px; border-radius: 20px;" class="form-control" placeholder="Internet price" />
+  <span class="help-block" style="color: green;" *ngIf="priceFieldRequired">Price is required.</span>
+  <span class="help-block" style="color: green;" *ngIf="priceLessThanValidation">Please enter price value greater than or equal to 1.</span>
+  <span class="help-block" style="color: green;" *ngIf="priceGreaterThanValidation">Please enter price value less than or equal to 99.</span>
+  <br>
+</div>
+
+<!-- SECOND -->
+<div class="btn-group" *ngIf="firstChoice == 'Yes, free' || firstChoice == 'Yes, paid'">
+  Connection type
+  <br>
+  <button *ngIf="accommodationConnectionType != undefined" type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    {{accommodationConnectionType}} <span class="caret"></span>
+  </button>
+
+  <button *ngIf="accommodationConnectionType == undefined" type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    N/A <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu" style="cursor: pointer">
+    <li *ngFor="let cbConnectionType of cbConnectionTypes"><a (click)="simpleDisplayDropdownConnectionTypeChoice(cbConnectionType.connectionType)">{{cbConnectionType.connectionType}}</a></li>
+  </ul>
+</div>
+
+<br>
+<br>
+<!-- THIRD -->
+<div class="btn-group" *ngIf="firstChoice == 'Yes, free' || firstChoice == 'Yes, paid'">
+  Connection location
+  <br>
+  <button *ngIf="accommodationConnectionLocation != undefined" type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    {{accommodationConnectionLocation}} <span class="caret"></span>
+  </button>
+
+  <button *ngIf="accommodationConnectionLocation == undefined" type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    N/A <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu" style="cursor: pointer">
+    <li *ngFor="let cbConnectionLocation of cbConnectionLocations"><a (click)="simpleDisplayDropdownConnectionLocationChoice(cbConnectionLocation.locationName)">{{cbConnectionLocation.locationName}}</a></li>
+  </ul>
+</div>
+
+
+<br>
+<button (click)="handleSaveInternetForm()" [disabled]="allValidation" style="float: right" class="btn btn-success">Save Changes</button>

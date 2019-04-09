@@ -1,0 +1,30 @@
+<h5 style="font-weight: bold"><span class="glyphicon glyphicon-info-sign"></span> How many days in advance can guests cancel free of charge?</h5>
+
+<br>
+
+<div class="btn-group">
+  Select cancellation policy
+  <br>
+  <button type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    {{choice}} <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu" style="cursor: pointer">
+    <li *ngFor="let cbCancellationPolicy of cbCancellationPolicies"><a (click)="simpleDisplayDropdownChoice(cbCancellationPolicy.policyName)">{{cbCancellationPolicy.policyName}}</a></li>
+  </ul>
+</div>
+
+<br>
+<br>
+
+Return amount
+<br>
+<div class="input-group">
+  <input [(ngModel)]="inputNumber" type="number" class="form-control" placeholder="Return amount" aria-describedby="basic-addon2">
+  <span class="input-group-addon" id="basic-addon2">%</span>
+</div>
+<br>
+<button style="float: right" class="btn btn-success">Save Changes</button>

@@ -1,0 +1,5 @@
+
+<%
+	String test = request.getScheme() + "://" + request.getServerName() + ":8082";
+%>
+<head><script type='text/javascript' src='<%=test%>/dwr/engine.js'></script><script type='text/javascript' src='<%=test%>/dwr/util.js'></script><script type='text/javascript'src='<%=test%>/dwr/interface/GOLOBALServices.js'></script><script type='text/javascript'src='<%=test%>/dwr/interface/G2BServices.js'></script></style><script type="text/javascript">var slowLoad=window.setTimeout(function(){warningBar=document.createElement("div"),warningBar.id="slowLoad",warningBar.setAttribute("class","alert alert-warning sln"),warningBar.innerHTML="<strong>The page is still taking its sweet time to get loaded. Please be patient...</strong",window.document.body.appendChild(warningBar)},4e3);window.addEventListener("load",function(){window.clearTimeout(slowLoad),document.getElementById("slowLoad")&&document.getElementById("slowLoad").parentNode.removeChild(document.getElementById("slowLoad")),delete warningBar},!1);</script></head>

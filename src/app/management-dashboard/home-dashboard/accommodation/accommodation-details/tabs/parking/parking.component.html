@@ -1,0 +1,129 @@
+<h5 style="font-weight: bold"><span class="glyphicon glyphicon-info-sign"></span> This information is especially important for those traveling to your property by car.</h5>
+<span class="help-block" style="color: green;" *ngIf="successSave">Saved (this help-block is under design)</span>
+
+<br>
+
+<div class="btn-group">
+  Is parking available to guest?
+  <br>
+  <button *ngIf="firstChoice == null || firstChoice == 'No'" type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    No <span class="caret"></span>
+  </button>
+
+  <button *ngIf="firstChoice == 'Yes, free'" type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    Yes, free <span class="caret"></span>
+  </button>
+
+  <button *ngIf="firstChoice == 'Yes, paid'" type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    Yes, paid <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu" style="cursor: pointer">
+    <li><a (click)="simpleDisplayDropdownFirstChoice('No')">No</a></li>
+    <li><a (click)="simpleDisplayDropdownFirstChoice('Yes, free')">Yes, free</a></li>
+    <li><a (click)="simpleDisplayDropdownFirstChoice('Yes, paid')">Yes, paid</a></li>
+  </ul>
+</div>
+
+<div *ngIf="firstChoice == 'Yes, free'">
+  <br>
+</div>
+
+<div *ngIf="firstChoice == 'Yes, paid'">
+  <br>
+  Parking price
+  <input [(ngModel)]="priceValue" (input)="validatePriceField()" type="number" style="width: 200px; border-radius: 20px;" class="form-control" placeholder="Parking price" />
+  <span class="help-block" style="color: green;" *ngIf="priceFieldRequired">Price is required.</span>
+  <span class="help-block" style="color: green;" *ngIf="priceLessThanValidation">Please enter value greater than or equal to 1.</span>
+  <span class="help-block" style="color: green;" *ngIf="priceGreaterThanValidation">Please enter value less than or equal to 99.</span>
+  <br>
+</div>
+
+<!-- SECOND -->
+<div class="btn-group" *ngIf="firstChoice == 'Yes, free' || firstChoice == 'Yes, paid'">
+  Type
+  <br>
+  <button *ngIf="secondChoice != null" type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    {{secondChoice}} <span class="caret"></span>
+  </button>
+
+  <button *ngIf="secondChoice == null" type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    N/A <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu" style="cursor: pointer">
+    <li><a (click)="simpleDisplayDropdownSecondChoice('Private')">Private</a></li>
+    <li><a (click)="simpleDisplayDropdownSecondChoice('Public')">Public</a></li>
+  </ul>
+</div>
+
+<br>
+<br>
+<!-- THIRD -->
+<div class="btn-group" *ngIf="firstChoice == 'Yes, free' || firstChoice == 'Yes, paid'">
+  Site
+  <br>
+  <button *ngIf="thirdChoice != null" type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    {{thirdChoice}} <span class="caret"></span>
+  </button>
+
+  <button *ngIf="thirdChoice == null" type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    N/A <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu" style="cursor: pointer">
+    <li><a (click)="simpleDisplayDropdownThirdChoice('On site')">On site</a></li>
+    <li><a (click)="simpleDisplayDropdownThirdChoice('Off site')">Off site</a></li>
+  </ul>
+</div>
+
+<br>
+<br>
+<!-- FOURTH -->
+<div class="btn-group" *ngIf="firstChoice == 'Yes, free' || firstChoice == 'Yes, paid'">
+  Reservation
+  <br>
+  <button *ngIf="fourthChoice != null" type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    {{fourthChoice}} <span class="caret"></span>
+  </button>
+
+  <button *ngIf="fourthChoice == null" type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    N/A <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu" style="cursor: pointer">
+    <li><a (click)="simpleDisplayDropdownFourthChoice('Reservation needed')">Reservation needed</a></li>
+    <li><a (click)="simpleDisplayDropdownFourthChoice('No reservation needed')">No reservation needed</a></li>
+  </ul>
+</div>
+
+
+<br>
+<button (click)="handleSaveParkingForm()" [disabled]="allValidation" style="float: right" class="btn btn-success">Save Changes</button>

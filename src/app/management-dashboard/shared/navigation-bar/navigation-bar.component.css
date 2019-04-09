@@ -1,0 +1,40 @@
+nav{
+    background-color: #003e75;
+}
+
+#navbarlist a {
+    color: #ffffff;
+}
+
+#navbarlist li:hover{
+    background-color: #002142;
+}
+
+.navbar-default .navbar-toggle{
+    background-color: #003e75 !important;
+    border: 2px white groove;
+}
+
+.navbar-toggle:hover{
+    background-color: #002142;
+}
+
+@media (min-width: 768px){
+
+    #logoid{
+        float: left;
+        margin-left: 100px;
+        margin-top: 8px;
+        width: 150px;
+    }
+}
+
+@media (max-width: 768px){
+
+    #logoid{
+        float: left;
+        margin-left: 10px;
+        margin-top: 8px;
+        width: 150px;
+    }
+}

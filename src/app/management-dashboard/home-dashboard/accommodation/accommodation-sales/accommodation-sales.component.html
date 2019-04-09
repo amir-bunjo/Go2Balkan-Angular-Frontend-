@@ -1,0 +1,19 @@
+
+<div class="panel panel-default">
+  <div class="panel-heading custom-css-class-miroslav1">
+
+    <span class="glyphicon glyphicon-transfer"></span>
+    <label class="custom-css-class">&nbsp;&nbsp;&nbsp; Accommodation sales</label>
+   
+    <button  class="pull-right" type="button"  class="btn btn-sm btn-primary btn-create" data-toggle="modal" (click)="fetch()"  >Details</button>
+  
+    <p *ngFor="let f of bookingModel">{{f.g2bFee}}</p>
+  </div>
+
+  <app-data-table></app-data-table>
+
+
+
+</div>
+
+

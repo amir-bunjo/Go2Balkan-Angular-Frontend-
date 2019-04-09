@@ -1,0 +1,19 @@
+<div class="row">
+  <form class=" cols-sm-3" [formGroup]="poolForm">
+    <div class="col-md-4" *ngFor="let front of poolSpa">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="form-group">
+            <div class="checkbox checbox-switch switch-primary">
+              <label>
+                <input type="checkbox" name="{{front.amenityName}}" formControlName="{{front.amenityName}}"/>
+                <span></span>
+                {{front.amenityName}}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,202 @@
+<app-header [idAccommodation]="id"></app-header>
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse1" (click)="getActivities()">
+                    <i class="fa fa-briefcase" aria-hidden="true"></i>
+                    Activity </a>
+            </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse">
+            <div class="panel-body">
+                <span *ngIf="activitiesStatus">
+                    <app-amenities-activities [ActivityAccommodation]="accommodation" [activties]="activities"></app-amenities-activities>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse2" style="cursor: pointer" (click)="getFood()"> <i
+                        class="fa fa-cutlery" aria-hidden="true"></i>
+                    Food & Drink </a>
+            </h4>
+        </div>
+        <div id="collapse2" class="panel-collapse collapse">
+            <div class="panel-body">
+                <span *ngIf="foodStatus">  <app-amenities-food-drink
+                        [AccommodationFood]="accommodation" [foods]="food"></app-amenities-food-drink></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse3" style="cursor: pointer" (click)="getPool()"> <i
+                        class="fa fa-bath" aria-hidden="true"></i>
+                    Pool SPA </a>
+            </h4>
+        </div>
+        <div id="collapse3" class="panel-collapse collapse">
+            <div class="panel-body">
+                <span *ngIf="poolStatus">  <app-amenities-pool-spa
+                        [AccommodationPool]="accommodation" [poolSpa]="poolSpa"></app-amenities-pool-spa></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse4" style="cursor: pointer" (click)="getTransport()"> <i
+                        class="fa fa-car" aria-hidden="true"></i>
+                    Transportation </a>
+            </h4>
+        </div>
+        <div id="collapse4" class="panel-collapse collapse">
+            <div class="panel-body">
+                <span *ngIf="transportStatus">  <app-amenities-transportation
+                        [AccommodationTransportation]="accommodation" [transportation]="transporation"></app-amenities-transportation></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse5" style="cursor: pointer" (click)="getFrondesk()"> <i
+                        class="fa fa-university" aria-hidden="true"></i>
+                    Frontdesk Service </a>
+            </h4>
+        </div>
+        <div id="collapse5" class="panel-collapse collapse">
+            <div class="panel-body">
+                <span *ngIf="frondeskStatus">  <app-amenities-frontdesk
+                        [frontdeskservice]="frontDeskService" [AccommodationFront]="accommodation"></app-amenities-frontdesk></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse6" style="cursor: pointer" (click)="getCommonAreas()"> <i
+                        class="fa fa-cubes" aria-hidden="true"></i>
+                    Common Areas </a>
+            </h4>
+        </div>
+        <div id="collapse6" class="panel-collapse collapse">
+            <div class="panel-body">
+                <span *ngIf="commonAreasStatus">  <app-amenities-common-areas
+                        [commonAreasLocal]="commonAreas" [AccommodationCommon]="accommodation"></app-amenities-common-areas></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse7" style="cursor: pointer" (click)="getEnter()"> <i
+                        class="fa fa-gamepad" aria-hidden="true"></i>
+                    Entertainment </a>
+            </h4>
+        </div>
+        <div id="collapse7" class="panel-collapse collapse">
+            <div class="panel-body">
+                <span *ngIf="enterStatus">  <app-amenities-entertainment
+                        [entertainmentLocal]="enter" [AccommodationEntertainment]="accommodation"></app-amenities-entertainment></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse8" style="cursor: pointer" (click)="getClean()"> <i
+                        class="fa fa-hand-paper-o" aria-hidden="true"></i>
+                    Cleaning</a>
+            </h4>
+        </div>
+        <div id="collapse8" class="panel-collapse collapse">
+            <div class="panel-body">
+                <span *ngIf="cleaningStatus">  <app-amenities-cleaning-services
+                        [cleaningLocal]="cleaning" [AccommodationCleaning]="accommodation"></app-amenities-cleaning-services></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse9" style="cursor: pointer" (click)="getFacilities()"> <i
+                        class="fa fa-briefcase" aria-hidden="true"></i>
+                    Business Facilities</a>
+            </h4>
+        </div>
+        <div id="collapse9" class="panel-collapse collapse">
+            <div class="panel-body">
+                <span *ngIf="facilitiesStatus">  <app-amenities-business-facilities
+                        [facilities]="facilities" [FacilitiesAccommodation]="accommodation"></app-amenities-business-facilities></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse10" style="cursor: pointer" (click)="getShop()"> <i
+                        class="fa fa-briefcase" aria-hidden="true"></i>
+                    Shops</a>
+            </h4>
+        </div>
+        <div id="collapse10" class="panel-collapse collapse">
+            <div class="panel-body">
+                <span *ngIf="shopStatus">  <app-amenities-shops
+                        [shop]="shop" [AccommodationShop]="accommodation"></app-amenities-shops></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse11" style="cursor: pointer" (click)="getMiscellaneous()"> <i
+                        class="fa fa-briefcase" aria-hidden="true"></i>
+                    Miscellaneous</a>
+            </h4>
+        </div>
+        <div id="collapse11" class="panel-collapse collapse">
+            <div class="panel-body">
+                <span *ngIf="miscellaneousStatus">  <app-amenities-miscellaneous
+                        [miscellaneous]="miscellaneous" [AccommodationMiscellaneous]="accommodation"></app-amenities-miscellaneous></span>
+            </div>
+        </div>
+    </div>
+</div>

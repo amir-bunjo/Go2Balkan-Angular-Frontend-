@@ -1,0 +1,25 @@
+.btn {
+    background-color: #003e75 ;
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: DodgerBlue;
+}
+
+.btnspacer {
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+
+
+}
+
+.inner {
+    padding-top: 3%;
+    padding-bottom: 3%;
+}

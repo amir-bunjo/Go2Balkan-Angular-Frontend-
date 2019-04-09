@@ -1,0 +1,113 @@
+<h5 style="font-weight: bold"><span class="glyphicon glyphicon-globe"></span> Languages spoken by staff</h5>
+
+<br>
+
+<div class="panel panel-default">
+  <div class="panel-heading custom-css-class-miroslav1">
+
+    <span class="glyphicon glyphicon-font"></span>
+    <label>&nbsp;&nbsp;&nbsp; Staff languages</label>
+
+    <button style="float: right; margin-top: -6px; border-radius: 20px; width: 70px;"
+            (click)="getCbAccommodationStaffLanguages()"
+            type="button"
+            data-toggle="modal" data-target="#myModal"
+            class="btn btn-default">
+
+      <span class="glyphicon glyphicon-plus"></span>
+    </button>
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <tr>
+        <th>Languages</th>
+        <th>Option</th>
+      </tr>
+      <tr *ngFor="let staffLanguage of staffLanguages">
+        <td style="font-size: 20px;">{{staffLanguage}}</td>
+        <td>
+          <div *ngIf="staffLanguages != ''" class="btn-group" role="group">
+            <button type="button" [disabled]="deleteAction" (click)="setDeleteLanguageChoice(staffLanguage)" data-toggle="modal" data-target="#myModal1"
+                    class="btn btn-default"><span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" (click)="setLanguageChoiceToEmpty()" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Select new staff languages</h4>
+      </div>
+      <div class="modal-body">
+
+        <h5 style="font-weight: bold"><span class="glyphicon glyphicon-info-sign"></span> Select the language(s) in which you or your staff can help guests.</h5>
+
+        <div class="btn-group">
+          Select new one
+          <br>
+          <button *ngIf="newLanguageChoice == ''" [disabled]="additionAction" type="button" class="btn btn-default dropdown-toggle"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false">
+            Please select <span class="caret"></span>
+          </button>
+
+          <button *ngIf="newLanguageChoice != ''" [disabled]="additionAction" type="button" class="btn btn-default dropdown-toggle"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false">
+            {{newLanguageChoice}} <span class="caret"></span>
+          </button>
+
+          <br>
+          <br>
+
+          <span class="help-block" style="color: green;" *ngIf="newLanguageChoice != ''">Successfully added new {{newLanguageChoice}} language.</span>
+
+          <ul class="dropdown-menu scrollable-menu" style="cursor: pointer">
+            <li *ngFor="let cbLanguage of newCbLanguagesList"><a (click)="addNewLanguage(cbLanguage)">{{cbLanguage}}</a></li>
+          </ul>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="setLanguageChoiceToEmpty()" class="btn btn-default" data-dismiss="modal">Close</button>
+        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Second Modal -->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel1">{{deleteLanguageChoice}}</h4>
+      </div>
+      <div class="modal-body">
+
+        <h5 style="font-weight: bold"><span class="glyphicon glyphicon-info-sign"></span> Are you sure you want to delete {{deleteLanguageChoice}}</h5>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="setDeleteLanguageChoiceToEmpty()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" (click)="deleteStaffLanguage(deleteLanguageChoice)" data-dismiss="modal" class="btn btn-primary">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

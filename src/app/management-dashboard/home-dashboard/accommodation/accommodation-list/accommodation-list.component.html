@@ -1,0 +1,26 @@
+<div class="container-fluid" style="margin-left: 0px;margin-right: 0px;padding:unset">
+  <div class="row">
+    <div  *ngFor="let acco of accommodationsList ">
+      <a style="cursor: pointer;"(click)="navigate(acco.id)">
+        <div class="col-lg-4">
+          <div class="card">
+            <span *ngIf="acco.rank >0" class="new">
+              <span *ngIf="acco.rank >= 1" class="fa fa-star checked"></span>
+              <span *ngIf="acco.rank >= 2" class="fa fa-star checked"></span>
+              <span *ngIf="acco.rank >= 3" class="fa fa-star checked"></span>
+              <span *ngIf="acco.rank >= 4" class="fa fa-star checked"></span>
+              <span *ngIf="acco.rank >= 5" class="fa fa-star checked"></span>
+            </span>
+            <img *ngIf="acco.promoPic == null" style="height: 200px; width: 100%" src="http://www.pngmart.com/files/4/Hotel-PNG-Clipart.png">
+            <img *ngIf="acco.promoPic != null" style="height: 200px; width: 100%" src="{{acco.promoPic}}">
+            <h4 style="text-align: center">{{acco.name}}</h4>
+            <p style="text-align: center;">{{acco.accommodationType}}</p>
+
+
+            <br>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

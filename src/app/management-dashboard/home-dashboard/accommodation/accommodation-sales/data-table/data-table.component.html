@@ -1,0 +1,67 @@
+<div class="mat-elevation-z8 data-table">
+  <table mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
+    <!-- Column -->
+    <ng-container matColumnDef="clientName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Client name</th>
+      <td mat-cell *matCellDef="let row">{{row.clientName}}</td>
+    </ng-container>
+
+    <!-- Column -->
+    <ng-container matColumnDef="room">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Room</th>
+      <td mat-cell *matCellDef="let row">{{row.room}}</td>
+    </ng-container>
+
+    <!-- Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+      <td mat-cell *matCellDef="let row">{{row.price}}</td>
+    </ng-container>
+
+    <!-- Column -->
+    <ng-container matColumnDef="paidOrRemaining">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Paid/Remaining</th>
+      <td mat-cell *matCellDef="let row">{{row.paidOrRemaining}}</td>
+    </ng-container>
+
+    <!-- Column -->
+    <ng-container matColumnDef="startDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Start date</th>
+      <td mat-cell *matCellDef="let row">{{row.startDate}}</td>
+    </ng-container>
+
+    <!-- Column -->
+    <ng-container matColumnDef="endDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>End date</th>
+      <td mat-cell *matCellDef="let row">{{row.endDate}}</td>
+    </ng-container>
+
+    <!-- Column -->
+    <ng-container matColumnDef="reservationDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Reservation date</th>
+      <td mat-cell *matCellDef="let row">{{row.reservationDate}}</td>
+    </ng-container>
+
+    <!-- Column -->
+    <ng-container matColumnDef="gatewayId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Gateway ID</th>
+      <td mat-cell *matCellDef="let row">{{row.gatewayId}}</td>
+    </ng-container>
+
+    <!-- Column -->
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Options</th>
+      <td mat-cell *matCellDef="let row">Option</td> 
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+ <!-- [length]="dataSource.data.length"  mozda bi trebalo bit u ovim stilovima al prijavljuje gresku--> 
+  <mat-paginator #paginator
+      
+      [pageIndex]="0"
+      [pageSize]="50"
+      [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>
+</div>

@@ -1,0 +1,205 @@
+<div aria-hidden="true" aria-labelledby="modalLabel" class="modal fade" id="addRoomType" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button #btnClose class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title" id="lineModalLabel" style="text-align: center">Add new Room Type</h3>
+            </div>
+
+
+            <div class="modal-body">
+                <form (ngSubmit)="saveRoomType();" [formGroup]="roomTypeForm">
+
+
+                    <div class="form-group">
+                        <div class="col-sm-4">
+
+                            <label for="roomtype">Room Type</label>
+                            <ng-select [items]="roomTypes" bindLabel="roomType" formControlName="roomtype"
+                                       id="roomtype"
+                                       placeholder="Select Room Type"></ng-select>
+                        </div>
+
+
+                        <div class="col-sm-8">
+
+                            <label for="roomname">Room Name</label>
+                            <ng-select *ngIf="roomNameData !== null" [items]="roomNameData" bindLabel="roomTypeName"
+                                       formControlName="roomname"
+                                       id="roomname"
+                                       placeholder="Select Room Type"></ng-select>
+
+                            <select *ngIf="roomNameData == null" class="form-control"
+                                    id="room"
+                                    name="room">
+                                <option disabled selected value="">Select Room Name</option>
+
+
+                            </select>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <label for="customname">Custom name (optional)</label>
+                            <input class="form-control" formControlName="customname"
+                                   id="customname"
+                                   name="customname"
+                                   type="text">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-6">
+
+                            <label for="roomnumber">Number of rooms</label>
+                            <input class="form-control" formControlName="roomnumber"
+                                   id="roomnumber"
+                                   name="roomnumber"
+                                   type="number">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="roomsize">Room size</label>
+                            <input class="form-control" formControlName="roomsize"
+                                   id="roomsize"
+                                   name="roomsize"
+                                   type="text">
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+
+                            <label for="desc">Desciption</label>
+
+                            <app-ngx-editor formControlName="desc"
+                                            height="150px"
+                                            minHeight="50px"
+                                            name="desc"
+                                            placeholder="Description..."
+                                            resizer="false" spellcheck="true"
+                            ></app-ngx-editor>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-sm-12">
+                        <div class="panel panel-default ">
+                            <div class="panel-heading ">Bed option</div>
+                            <div class="panel-body">
+
+                                <div class="form-group">
+                                    <div class="col-sm-12"><label> Choose a bed</label></div>
+                                    <div class="col-sm-4">
+
+                                        <label><input formControlName="twin" name="twin" type="checkbox">Twin</label>
+
+                                        <select *ngIf="twinStatus" class="form-control"
+                                                formControlName="twinselect" id="twinselect"
+                                                name="twinselect">
+                                            <option disabled selected value="">Number of bed</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="col-sm-4">
+
+                                        <label><input formControlName="full" name="full" type="checkbox">Full</label>
+
+                                        <select *ngIf="fullStatus" class="form-control"
+                                                formControlName="fullselect" id="fullselect"
+                                                name="fullselect">
+                                            <option disabled selected value="">Number of bed</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="col-sm-4">
+
+                                        <label><input formControlName="queen" name="queen" type="checkbox">Queen</label>
+
+                                        <select *ngIf="queenStatus" class="form-control"
+                                                formControlName="queenselect" id="queenselect"
+                                                name="queenselect">
+                                            <option disabled selected value="">Number of bed</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Extra bed</div>
+                            <div class="panel-body">
+                                <div class="col-sm-6">
+                                    <label><input formControlName="extra" name="extra" type="checkbox">Provide extra bed ?</label>
+                                    <select *ngIf="extraStatus" class="form-control"
+                                            formControlName="extraselect" id="extraselect"
+                                            name="extraselect">
+                                        <option disabled selected value="">Number of bed</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label><input formControlName="adult" name="adult" type="checkbox">Adult</label>
+                                    <input *ngIf="adultStatus" class="form-control" formControlName="adultprice"
+                                           id="adultprice"
+                                           name="adultprice"
+                                           type="adultprice">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer  ">
+                        <div aria-label="group button" class="btn-group btn-group-justified" role="group">
+                            <div class="btn-group col-md-12" role="group">
+                                <button class="btn btn-primary" role="button" type="submit" [disabled]="!roomTypeForm.valid">
+                                    Save Room Type
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

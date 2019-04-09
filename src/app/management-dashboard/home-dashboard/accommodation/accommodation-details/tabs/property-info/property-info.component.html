@@ -1,0 +1,205 @@
+<h5 style="font-weight: bold"><span class="glyphicon glyphicon-info-sign"></span> Describe your property</h5>
+<span class="help-block" style="color: green;" *ngIf="successSave">Saved (this help-block is under animations design)</span>
+<br>
+<form *ngIf="initDone" [formGroup]="propertyInfoForm">
+
+  <!--<div class="row col-xs-6 col-md-6" id="divcolumn-customid1">-->
+  <div class="row col-xs-6 col-md-6" id="divcolumn-customid1">
+
+    Property Name
+    <input formControlName="propertyName" type="text" class="form-control" placeholder="Property Name" />
+
+    <span class="help-block" style="color: green;" *ngIf="!propertyInfoForm.get('propertyName').valid && propertyInfoForm.get('propertyName').touched">Property name is required.</span>
+    <br>
+
+    <!-- STARS PROPERTY IS 2-WAY BINDEND TO VARIABLE: stars -->
+    Stars
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <label *ngIf="stars == null">
+          <div style="margin-top: 7px;">N/A</div>
+        </label>
+        <label *ngIf="stars == 1">
+          <span style="margin-top: 8px" class="fa fa-star checked"></span>
+        </label>
+        <label *ngIf="stars == 2">
+          <span style="margin-top: 8px" class="fa fa-star checked"></span>
+          <span style="margin-top: 8px" class="fa fa-star checked"></span>
+        </label>
+        <label *ngIf="stars == 3">
+          <span style="margin-top: 8px" class="fa fa-star checked"></span>
+          <span style="margin-top: 8px" class="fa fa-star checked"></span>
+          <span style="margin-top: 8px" class="fa fa-star checked"></span>
+        </label>
+        <label *ngIf="stars == 4">
+          <span style="margin-top: 8px" class="fa fa-star checked"></span>
+          <span style="margin-top: 8px" class="fa fa-star checked"></span>
+          <span style="margin-top: 8px" class="fa fa-star checked"></span>
+          <span style="margin-top: 8px" class="fa fa-star checked"></span>
+        </label>
+        <label *ngIf="stars == 5">
+          <span style="margin-top: 8px" class="fa fa-star checked"></span>
+          <span style="margin-top: 8px" class="fa fa-star checked"></span>
+          <span style="margin-top: 8px" class="fa fa-star checked"></span>
+          <span style="margin-top: 8px" class="fa fa-star checked"></span>
+          <span style="margin-top: 8px" class="fa fa-star checked"></span>
+        </label>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li (click)="simpleDisplayStars(null)"><a>
+          N/A
+        </a></li>
+        <li (click)="simpleDisplayStars(1)"><a>
+          <span class="fa fa-star checked"></span>
+        </a></li>
+        <li (click)="simpleDisplayStars(2)"><a>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+        </a></li>
+        <li (click)="simpleDisplayStars(3)"><a>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+        </a></li>
+        <li (click)="simpleDisplayStars(4)"><a>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+        </a></li>
+        <li (click)="simpleDisplayStars(5)"><a>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+        </a></li>
+      </ul>
+    </div>
+
+    <br>
+    Check In
+    <div class="row">
+      <!--<div class="col-xs-12 col-md-12">-->
+      <div class="col-xs-12 col-md-12">
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{checkInStart}}<span class="caret"></span></button>
+          <ul style="cursor: pointer" class="dropdown-menu scrollable-menu" role="menu">
+            <li *ngFor="let checkInStartValue of checkInStartValuesAsList"><a (click)="simpleDisplaySelectedValueCheckInStart(checkInStartValue)">{{checkInStartValue}}</a></li>
+          </ul>
+        </div>
+
+        &nbsp;&nbsp;&nbsp;
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{checkInEnd}}<span class="caret"></span></button>
+          <ul style="cursor: pointer" class="dropdown-menu scrollable-menu" role="menu">
+            <li *ngFor="let checkInEndValue of checkInEndValuesAsList"><a (click)="simpleDisplaySelectedValueCheckInEnd(checkInEndValue)">{{checkInEndValue}}</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+
+    <br>
+    Check Out
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{checkOutStart}}<span class="caret"></span></button>
+          <ul style="cursor: pointer" class="dropdown-menu scrollable-menu" role="menu">
+            <li *ngFor="let checkOutStartValue of checkOutStartValuesAsList"><a (click)="simpleDisplaySelectedValueCheckOutStart(checkOutStartValue)">{{checkOutStartValue}}</a></li>
+          </ul>
+        </div>
+
+        &nbsp;&nbsp;&nbsp;
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{checkOutEnd}}<span class="caret"></span></button>
+          <ul style="cursor: pointer" class="dropdown-menu scrollable-menu" role="menu">
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+
+    <br>
+    <br>
+
+
+  </div>
+
+  <!--<div class="row col-xs-6 col-md-6" id="divcolumn-customid2">-->
+  <div class="row col-xs-6 col-md-6" id="divcolumn-customid2">
+
+    Your Country
+    <input formControlName="yourCountry" type="text" class="form-control" placeholder="Your Country" />
+
+
+    <br>
+    Phone Number
+    <div class="input-group custom-css-class-miroslav1">
+      <div class="input-group-addon">{{dialingCode}}</div>
+      <input formControlName="phoneNumber" type="number" class="form-control" placeholder="Phone Number">
+    </div>
+    <span class="help-block" style="color: green;" *ngIf="!propertyInfoForm.get('phoneNumber').valid && propertyInfoForm.get('phoneNumber').touched">Phone number is required.</span>
+
+    <br>
+    <br>
+    Email
+    <input formControlName="email" type="text" class="form-control" placeholder="Email" />
+    <span class="help-block" style="color: green;" *ngIf="!propertyInfoForm.get('email').valid && propertyInfoForm.get('email').touched">Email is not valid.</span>
+
+    <br>
+    Web
+    <input formControlName="web" type="text" class="form-control" placeholder="Web Address" />
+
+
+    <br>
+    <br>
+
+  </div>
+
+</form>
+
+<div *ngIf="initDone" class="row">
+
+  <div class="col-xs-12 col-md-12 ">
+
+    <table>
+      <tr>
+        <td>
+          <div *ngIf="accommodationData.description !== undefined || accommodationData.description != null" class="panel panel-default custom-css-class-miroslav1">
+            <div class="panel-heading"><span class="glyphicon glyphicon-font"></span><label class="custom-css-miroslav">&nbsp;&nbsp;&nbsp; Description</label></div>
+            <app-ngx-editor height = "300px"
+                            minHeight="50px"
+                            resizer="false"
+                            placeholder="Enter text here..."
+                            spellcheck="true"
+                            [(ngModel)]="accommodationData.description"></app-ngx-editor>
+          </div>
+        </td>
+
+        <td>
+          <div class="panel panel-default custom-css-class-miroslav2">
+            <div class="panel-heading"><span class="glyphicon glyphicon-globe"></span><label class="custom-css-miroslav">&nbsp;&nbsp;&nbsp; Location</label></div>
+
+            <!-- LOCATION (GOOGLE MAPS) CONTENT GOES HERE -->
+
+
+          </div>
+        </td>
+      </tr>
+    </table>
+
+
+    <br>
+    <button (click)="saveOrUpdatePropertyInfos()" style="float: right" class="btn btn-success">Save Changes</button>
+  </div>
+
+</div>

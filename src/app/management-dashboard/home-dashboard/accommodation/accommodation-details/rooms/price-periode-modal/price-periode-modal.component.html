@@ -1,0 +1,62 @@
+
+<h2 mat-dialog-title>Add Price Periode</h2>
+<form [formGroup]="pricePeriodForm" class="form-width">
+  <mat-dialog-content>
+
+    <mat-form-field class="full-width" >
+      <input matInput type="date"  placeholder="Start Date" formControlName="startdate"  >
+    </mat-form-field>
+
+
+    <mat-form-field class="full-width">
+      <input matInput type="date"  placeholder="End Date" formControlName="enddate">
+    </mat-form-field>
+
+
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Entry Price" formControlName="entryprice" required>
+    </mat-form-field>
+
+    <div *ngIf="!pricePeriodForm.get('entryprice').hasError('required')">
+      <mat-form-field >
+        <mat-select matNativeControl formControlName="vat" placeholder="VAT" >
+          <mat-option *ngFor="let vat of nizDel" value="{{vat}}">{{vat}} %</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Commision" formControlName="commision">
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-select matNativeControl formControlName="commisiontype" placeholder="Commision type" >
+          <mat-option value="1">%</mat-option>
+          <mat-option value="0">BAM</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="End User Price" formControlName="enduserprice" value="{{endUserPrice}}" >
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Tax" formControlName="tax" value="{{priceTax}}">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Total Price" formControlName="totalprice" value="{{totalPrice}}">
+      </mat-form-field>
+
+    </div>
+
+
+  </mat-dialog-content>
+
+  <div mat-dialog-actions>
+    <span class="fill-remaining-space"></span>
+    <button mat-raised-button mat-dialog-close [disabled]="pricePeriodForm.invalid" color="primary" (click)="savePricePeriode()">Save</button>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+  </div>
+
+</form>
+

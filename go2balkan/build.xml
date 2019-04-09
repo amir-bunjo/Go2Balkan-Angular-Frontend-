@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<project name="go2balkan" basedir="." >
+   
+   <property file="build.properties" />
+  
+   <path id="master-classpath">
+      <fileset dir="${web.dir}/WEB-INF/lib">
+         <include name="*.jar"/>
+      </fileset>
+      <pathelement path="${build.dir}"/>
+   </path>
+   <path id="tomcat.class.path"> 
+	 <fileset dir="${catalina.home}/lib"> 
+        <include name="**/*.jar"/>
+        <include name="**/*.zip"/>
+	 </fileset> 
+   	 <pathelement location="${catalina.home}/bin/bootstrap.jar"/>
+   	 <pathelement location="${catalina.home}/bin/tomcat-juli.jar"/>
+   </path> 
+	
+	<target name="tomcat-start" description="Start Tomcat">
+	    <echo>Stop Tomcat</echo>
+	    <java classname="org.apache.catalina.startup.Bootstrap" fork="true"
+	        classpathref="tomcat.class.path">
+	        <jvmarg value="-Dcatalina.home=${catalina.home}"/>
+	    </java>
+	</target>
+	
+	<target name="tomcat-stop" depends="tomcat-check-status" if="tomcat.started" description="Stop Tomcat">
+	    <echo>Start Tomcat</echo>
+	    <java classname="org.apache.catalina.startup.Bootstrap" fork="true"
+	        classpathref="tomcat.class.path">
+	        <jvmarg value="-Dcatalina.home=${catalina.home}"/>
+	        <arg line="stop"/>
+	    </java>
+	    <sleep seconds="5"/>
+	</target>
+	 
+	<target name="tomcat-check-status">
+	    <condition property="tomcat.started">
+	        <socket server="localhost" port="8081"/>
+	    </condition>
+	</target>
+	
+	<target name="debug" description="Debug Tomcat">
+		<echo>Debug Tomcat</echo>
+		<java classname="org.apache.catalina.startup.Bootstrap" fork="true" classpathref="tomcat.class.path">
+			<jvmarg value="-Dcatalina.home=${catalina.home}"/>
+			<jvmarg value="-Xdebug"/>
+			<jvmarg value="-Xrunjdwp:transport=dt_socket,address=5000,server=y,suspend=y"/>
+		</java>
+	</target>
+		
+
+   <target name="create-dir-tree" description="Create folter structure">
+   	<mkdir dir="${temp-classes.dir}" />  
+   	<mkdir dir="${build.dir}" />
+ 	<mkdir dir="${classes.dir}" description="Create classes folder"/> 
+   </target>
+	
+   <target name="delete-all" description="Delete all folders">
+   	<delete dir="${build.dir}" />
+   	<delete dir="${temp-classes.dir}" />
+   </target>
+
+   <target name="clean-all" description="Clean output directories">
+    <delete>
+       <fileset dir="${build.dir}">
+          <include name="**/*"/>
+       </fileset>
+    </delete>   
+    <delete>
+       <fileset dir="${classes.dir}">
+          <include name="**/*"/>
+       </fileset>
+    </delete> 
+    <delete>
+        <fileset dir="${classes.dir}">
+           <include name="**/*"/>
+        </fileset>
+    </delete> 
+    <delete>
+        <fileset dir="${meta-dest.dir}">
+           <include name="**/*"/>
+        </fileset>
+     </delete> 
+   </target>
+	
+   <target name="compile" depends="create-dir-tree" description="Compile source tree java files">
+      <javac srcdir="${src.dir}" 
+      	     destdir="${temp-classes.dir}" 
+      	     source="1.8" 
+      	     target="1.8" 
+      	     includeantruntime="false"  debug="true" debuglevel="lines,vars,source">      	
+         <classpath refid="master-classpath"/>
+      </javac>
+   </target>
+	
+   <target name="build-all" depends="compile" description="Compile and Copy ">
+	  <copy todir="${build.dir}">  
+	  	<fileset dir="${web.dir}" includes="**/*">
+	  	    <different targetdir="${build.dir}"
+	  	        ignoreFileTimes="false"
+	  	        ignoreContents="true" />
+	  	</fileset>
+	  </copy>   
+	  <copy todir="${classes.dir}">  
+	  	<fileset dir="${temp-classes.dir}" excludes="**/*_.class" includes="**/*.class" >
+	  	    <different targetdir="${classes.dir}"
+	  	        ignoreFileTimes="false"
+	  	        ignoreContents="true" />
+	  	</fileset>
+	  </copy> 
+      <delete>
+        <fileset dir="${temp-classes.dir}">
+           <include name="**/*"/>
+        </fileset>
+      </delete> 
+   </target>	
+	
+   <target name="copy-to-server" description="Copy to Tomcat">
+	  <copy todir="${server.dir}">  
+	  	<fileset dir="${build.dir}" includes="**/*">
+	  	    <different targetdir="${server.dir}"
+	  	        ignoreFileTimes="false"
+	  	        ignoreContents="true" />
+	  	</fileset>
+	  </copy> 
+   </target>
+			
+</project>

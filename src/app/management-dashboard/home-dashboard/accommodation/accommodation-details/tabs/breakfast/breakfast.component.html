@@ -1,0 +1,109 @@
+<h5 style="font-weight: bold"><span class="glyphicon glyphicon-info-sign"></span> Indicate if breakfast is included in the price, or if it's an optional add-on.</h5>
+
+<br>
+
+<div class="panel panel-default">
+  <div class="panel-heading custom-css-class-miroslav1">
+
+    <span class="glyphicon glyphicon-cutlery"></span>
+    <label>&nbsp;&nbsp;&nbsp; Breakfast</label>
+
+    <button
+            style="float: right; margin-top: -6px; border-radius: 20px; width: 70px;" type="button"
+            (click)="getCbAccommodationBreakfasts()"
+            data-toggle="modal" data-target="#myModal4"
+            class="btn btn-default">
+      <span class="glyphicon glyphicon-plus"></span>
+    </button>
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <tr>
+        <th id="firstth">Breakfast type</th>
+        <th>Price</th>
+        <th>Option</th>
+      </tr>
+      <tr *ngFor="let breakfast of breakfasts">
+        <td style="font-size: 20px;">{{breakfast}}</td>
+        <td style="font-size: 20px;">0(hardcoded)</td>
+        <td>
+          <div *ngIf="breakfasts != ''" class="btn-group" role="group">
+            <button [disabled]="deleteAction" (click)="setDeleteBreakfastChoice(breakfast)" data-toggle="modal" data-target="#myModal5" type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" (click)="setBreakfastChoiceToEmpty()" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Select new credit cards</h4>
+      </div>
+      <div class="modal-body">
+
+        <h5 style="font-weight: bold"><span class="glyphicon glyphicon-info-sign"></span> Select the breakfast type(s)</h5>
+
+        <div class="btn-group">
+          Select new breakfast type
+          <br>
+          <button *ngIf="newBreakfastChoice == ''" [disabled]="additionAction" type="button" class="btn btn-default dropdown-toggle"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false">
+            Please select <span class="caret"></span>
+          </button>
+
+          <button *ngIf="newBreakfastChoice != ''" [disabled]="additionAction" type="button" class="btn btn-default dropdown-toggle"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false">
+            {{newBreakfastChoice}} <span class="caret"></span>
+          </button>
+
+          <br>
+          <br>
+
+          <span class="help-block" style="color: green;" *ngIf="newBreakfastChoice != ''">Successfully added new {{newBreakfastChoice}} breakfast type.</span>
+
+          <ul class="dropdown-menu scrollable-menu" style="cursor: pointer">
+            <li *ngFor="let cbBreakfast of newCbBreakfastsList"><a (click)="addNewBreakfast(cbBreakfast)">{{cbBreakfast}}</a></li>
+          </ul>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="setBreakfastChoiceToEmpty()" class="btn btn-default" data-dismiss="modal">Close</button>
+        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Second Modal -->
+<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel1">{{deleteBreakfastChoice}}</h4>
+      </div>
+      <div class="modal-body">
+
+        <h5 style="font-weight: bold"><span class="glyphicon glyphicon-info-sign"></span> Are you sure you want to delete {{deleteBreakfastChoice}}</h5>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="setDeleteBreakfastChoiceToEmpty()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" (click)="deleteBreakfast(deleteBreakfastChoice)" data-dismiss="modal" class="btn btn-primary">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,151 @@
+<div class="side-menu" style="width:250px">
+
+  <nav class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <div class="brand-wrapper">
+        <!-- Hamburger -->
+        <button data-toggle="collapse in" type="button" class="navbar-toggle custom-toggle-class">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- Main Menu -->
+    <div class="side-menu-container" id="navbar2" >
+      <ul class="nav navbar-nav" id="navbarlist">
+
+        <!-- Miroslav: Use class="active" for active list child style -->
+
+        <li id="sidebar-list-child"><a routerLink="/dashboard"><span class="glyphicon glyphicon-home"></span> Dashboard </a></li>
+
+        <!-- ADMINISTRATION DROPDOWN LVL1-X -->
+        <li class="panel panel-default" id="dropdown">
+          <a data-toggle="collapse" href="#dropdown-lvl1-1">
+            <span class="glyphicon glyphicon-user"></span> Administration <span class="caret"></span>
+          </a>
+
+          <!-- Dropdown level 1 -->
+          <div id="dropdown-lvl1-1" class="panel-collapse collapse">
+            <div class="panel-body">
+              <ul class="nav navbar-nav">
+
+                <!-- 1. Dropdown level 2 -->
+                <li class="panel panel-default" id="dropdown">
+                  <a data-toggle="collapse" href="#dropdown-lvl1-2">
+                    <span class="glyphicon glyphicon-home"></span> Accommodations <span class="caret"></span>
+                  </a>
+                  <div id="dropdown-lvl1-2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <ul style="cursor:pointer;" class="nav navbar-nav">
+                        <li *ngFor="let accommodationIdAndName of accommodationsIdsAndNamesList"><a (click)="navigate(accommodationIdAndName.id)">{{accommodationIdAndName.name}}</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+
+                <!-- 2. Dropdown level 2 -->
+                <li class="panel panel-default" id="dropdown">
+                  <a data-toggle="collapse" href="#dropdown2-lvl1-2">
+                    <span class="glyphicon glyphicon-plane"></span> Travel Agencies <span class="caret"></span>
+                  </a>
+                  <div id="dropdown2-lvl1-2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <ul class="nav navbar-nav">
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </li>
+
+        <!-- SALES DROPDOWN LVL2-X -->
+        <li class="panel panel-default" id="dropdown">
+          <a data-toggle="collapse" href="#dropdown-lvl2-1">
+            <span class="glyphicon glyphicon-inbox"></span> Sales <span class="caret"></span>
+          </a>
+
+          <!-- Dropdown level 1 -->
+          <div id="dropdown-lvl2-1" class="panel-collapse collapse">
+            <div class="panel-body">
+              <ul class="nav navbar-nav">
+
+                <li class="panel panel-default" id="dropdown">
+                  <a data-toggle="collapse" href="#dropdown-lvl2-2">
+                    <span class="glyphicon glyphicon-home"></span> Accommodations <span class="caret"></span>
+                  </a>
+                  <div id="dropdown-lvl2-2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <ul style="cursor:pointer;" class="nav navbar-nav">
+                        <li *ngFor="let accommodationIdAndName of accommodationsIdsAndNamesList"><a (click)="navigate(accommodationIdAndName.id)">{{accommodationIdAndName.name}}</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+
+                <!-- 2. Dropdown level 2 -->
+                <li class="panel panel-default" id="dropdown">
+                  <a data-toggle="collapse" href="#dropdown2-lvl2-2">
+                    <span class="glyphicon glyphicon-plane"></span> Travel Agencies <span class="caret"></span>
+                  </a>
+                  <div id="dropdown2-lvl2-2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <ul class="nav navbar-nav">
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </li>
+
+
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </nav>
+
+</div>
+
+<!--<div class="container-fluid sidebar1" >
+  <div class="logo">
+    &lt;!&ndash;<img src="{{loggedUser.profilePic}}" class="img-responsive center-block" alt="Logo">&ndash;&gt;
+  </div>
+  <br>
+  <div class="left-navigation">
+    <ul class="list">
+      <li [ngClass]="{'active': selectedItem === 'item1'}" (click)="selectedItem = 'item1'" style="cursor: pointer;"
+          [routerLink]="['/settings']">
+        General</li>
+      <li [ngClass]="{'active': selectedItem === 'item2'}" (click)="selectedItem = 'item2'" >Security</li>
+      <li [ngClass]="{'active': selectedItem === 'item3'}" (click)="selectedItem = 'item3'" style="cursor: pointer;"
+          routerLinkActive="active" [routerLink]="['/settings/cards']">
+        Cards</li>
+    </ul>
+
+    <br>
+
+    <ul class="list">
+      <li>Privacy</li>
+      <li>Blocking</li>
+      <li>Language</li>
+      <li>Notifications</li>
+    </ul>
+  </div>
+</div>-->

@@ -1,0 +1,110 @@
+<h5 style="font-weight: bold"><span class="glyphicon glyphicon-credit-card"></span> Manage credit cards</h5>
+
+<br>
+
+<div class="panel panel-default">
+  <div class="panel-heading custom-css-class-miroslav1">
+
+    <span class="glyphicon glyphicon-credit-card"></span>
+    <label>&nbsp;&nbsp;&nbsp; Credit cards</label>
+
+    <button style="float: right; margin-top: -6px; border-radius: 20px; width: 70px;"
+            (click)="getCbAccommodationCreditCards()"
+            type="button"
+            data-toggle="modal" data-target="#myModal2"
+            class="btn btn-default">
+      <span class="glyphicon glyphicon-plus"></span>
+    </button>
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <tr>
+        <th>Cards</th>
+        <th>Option</th>
+      </tr>
+      <tr *ngFor="let creditCard of creditCards">
+        <td style="font-size: 20px;">{{creditCard}}</td>
+        <td>
+          <div *ngIf="creditCards != ''" class="btn-group" role="group">
+            <button type="button"
+                    [disabled]="deleteAction" (click)="setDeleteCardChoice(creditCard)" data-toggle="modal" data-target="#myModal3"
+                    class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" (click)="setCardChoiceToEmpty()" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Select new credit cards</h4>
+      </div>
+      <div class="modal-body">
+
+        <h5 style="font-weight: bold"><span class="glyphicon glyphicon-info-sign"></span> Select the cards(s) in which you or your staff can help guests.</h5>
+
+        <div class="btn-group">
+          Select new card
+          <br>
+          <button *ngIf="newCardChoice == ''" [disabled]="additionAction" type="button" class="btn btn-default dropdown-toggle"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false">
+            Please select <span class="caret"></span>
+          </button>
+
+          <button *ngIf="newCardChoice != ''" [disabled]="additionAction" type="button" class="btn btn-default dropdown-toggle"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false">
+            {{newCardChoice}} <span class="caret"></span>
+          </button>
+
+          <br>
+          <br>
+
+          <span class="help-block" style="color: green;" *ngIf="newCardChoice != ''">Successfully added new {{newCardChoice}} card.</span>
+
+          <ul class="dropdown-menu scrollable-menu" style="cursor: pointer">
+            <li *ngFor="let cbCreditCard of newCbCreditCardsList"><a (click)="addNewCard(cbCreditCard)">{{cbCreditCard}}</a></li>
+          </ul>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="setCardChoiceToEmpty()" class="btn btn-default" data-dismiss="modal">Close</button>
+        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Second Modal -->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel1">{{deleteCardChoice}}</h4>
+      </div>
+      <div class="modal-body">
+
+        <h5 style="font-weight: bold"><span class="glyphicon glyphicon-info-sign"></span> Are you sure you want to delete {{deleteCardChoice}}</h5>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="setDeleteCardChoiceToEmpty()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" (click)="deleteCreditCard(deleteCardChoice)" data-dismiss="modal" class="btn btn-primary">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

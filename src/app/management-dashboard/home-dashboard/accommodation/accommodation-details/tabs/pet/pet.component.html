@@ -1,0 +1,71 @@
+<h5 style="font-weight: bold"><span class="glyphicon glyphicon-info-sign"></span> Some guests like to travel with their furry friends. Indicate if you allow pets and if any charges apply.</h5>
+<span class="help-block" style="color: green;" *ngIf="successSave">Saved (this help-block is under design)</span>
+
+<br>
+
+<div class="btn-group">
+  Do you allow pets?
+  <br>
+  <button *ngIf="firstChoice == 'No' || firstChoice == null"type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    No <span class="caret"></span>
+  </button>
+
+  <button *ngIf="firstChoice != null && firstChoice != 'No'"type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    {{firstChoice}} <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu" style="cursor: pointer">
+    <li><a (click)="simpleDisplayDropdownFirstChoice('No')">No</a></li>
+    <li><a (click)="simpleDisplayDropdownFirstChoice('Yes')">Yes</a></li>
+    <li><a (click)="simpleDisplayDropdownFirstChoice('Upon request')">Upon request</a></li>
+  </ul>
+</div>
+
+<br>
+<br>
+<div *ngIf="firstChoice == 'Yes' || firstChoice == 'Upon request'" class="btn-group">
+  Are there additional charges for pets?
+  <br>
+  <button *ngIf="secondChoice == null"type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    N/A <span class="caret"></span>
+  </button>
+
+  <button *ngIf="secondChoice != null"type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    {{secondChoice}} <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu" style="cursor: pointer">
+    <li><a (click)="simpleDisplayDropdownSecondChoice('Pets can stay for free')">Pets can stay for free</a></li>
+    <li><a (click)="simpleDisplayDropdownSecondChoice('Charges may apply')">Charges may apply</a></li>
+  </ul>
+</div>
+
+<br>
+<br>
+
+<div *ngIf="secondChoice == 'Charges may apply' && firstChoice != 'No'">
+  Price
+  <br>
+  <div class="input-group">
+    <input [(ngModel)]="priceValue" type="number" class="form-control" placeholder="Price" aria-describedby="basic-addon2">
+    <span class="input-group-addon" id="basic-addon2">KM</span>
+  </div>
+</div>
+
+
+
+
+<br>
+<button (click)="handleSavePetForm()" style="float: right" class="btn btn-success">Save Changes</button>

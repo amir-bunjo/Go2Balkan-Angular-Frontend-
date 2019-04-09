@@ -1,0 +1,47 @@
+<app-header [idAccommodation]="accommodationId"></app-header>
+
+
+<div class="panel panel-default" >
+  <div class="panel-heading">Room Galery</div>
+  <div class="panel-body">
+
+      <div class="row" >
+
+          <div class="col-md-3 col-sm-3 col-lg-3" *ngFor="let room of picArray; let i=index" >
+            <img src="{{room}}" style="border-radius: 8px" width="150px" height="100px" /> 
+             <!-- <div class="overlay"><button class="btn btn-outline-light"></button></div>-->
+                <div class="col-md-6 col-sm-4 col-lg-6" class="row">
+                    <button type="button" class="btn btn-info" (click)="upload()">
+                        Upload
+                    </button>
+                    <button type="button" class="btn btn-primary" >
+                      <label for="image-input">Choose pic</label>
+                    </button>
+                    <input type="file" id="image-input" [multiple]="true" accept="image/*" (change)="onFileSelected($event,-1)" style="display:none">
+                </div> 
+          </div>
+          
+         
+      </div>
+   
+  </div>
+</div>
+
+
+<div class="row">
+  <button class="btn btn-info" (click)="upload()">
+    Upload
+  </button>
+
+  <button type="button" class="btn btn-primary">
+    <label for="file-input">Add image</label>
+  </button>
+  <input type="file" id="file-input" [multiple]="true" accept="image/*" (change)="onFileSelected($event,-1)" style="display:none">
+
+</div>
+
+
+
+
+
+
